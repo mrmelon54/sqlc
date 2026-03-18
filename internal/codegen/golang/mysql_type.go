@@ -31,14 +31,22 @@ func mysqlType(req *plugin.GenerateRequest, options *opts.Options, col *plugin.C
 		} else {
 			if notNull {
 				if unsigned {
-					return "uint32"
+					return "uint8"
 				}
-				return "int32"
+				return "int8"
 			}
-			return "sql.NullInt32"
+			// The database/sql package does not have a sql.NullInt8 type, so we
+			// use the smallest type they have which is NullInt16
+			return "sql.NullInt16"
 		}
 
-	case "smallint", "year":
+	case "year":
+		if notNull {
+			return "int16"
+		}
+		return "sql.NullInt16"
+
+	case "smallint":
 		if notNull {
 			if unsigned {
 				return "uint16"
@@ -56,7 +64,11 @@ func mysqlType(req *plugin.GenerateRequest, options *opts.Options, col *plugin.C
 		}
 		return "sql.NullInt32"
 
-	case "bigint":
+	case "bigint", "bigint unsigned", "bigint signed":
+		// "bigint unsigned" and "bigint signed" are MySQL CAST types
+		// Note: We use int64 for CAST AS UNSIGNED to match original behavior,
+		// even though uint64 would be more semantically correct.
+		// The Unsigned flag on columns (from table schema) still uses uint64.
 		if notNull {
 			if unsigned {
 				return "uint64"

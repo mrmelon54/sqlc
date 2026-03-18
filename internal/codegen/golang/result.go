@@ -141,9 +141,7 @@ func newGoEmbed(embed *plugin.Identifier, structs []Struct, defaultSchema string
 		}
 
 		fields := make([]Field, len(s.Fields))
-		for i, f := range s.Fields {
-			fields[i] = f
-		}
+		copy(fields, s.Fields)
 
 		return &goEmbed{
 			modelType: s.Name,
@@ -259,7 +257,9 @@ func buildQueries(req *plugin.GenerateRequest, options *opts.Options, structs []
 				EmitPointer: options.EmitParamsStructPointers,
 			}
 
-			if len(query.Params) <= qpl {
+			// if query params is 2, and query params limit is 4 AND this is a copyfrom, we still want to emit the query's model
+			// otherwise we end up with a copyfrom using a struct without the struct definition
+			if len(query.Params) <= qpl && query.Cmd != ":copyfrom" {
 				gq.Arg.Emit = false
 			}
 		}

@@ -1,76 +1,66 @@
 module github.com/sqlc-dev/sqlc
 
-go 1.21
+go 1.26.0
 
 require (
-	github.com/antlr4-go/antlr/v4 v4.13.0
+	github.com/antlr4-go/antlr/v4 v4.13.1
 	github.com/cubicdaiya/gonp v1.0.4
 	github.com/davecgh/go-spew v1.1.1
 	github.com/fatih/structtag v1.2.0
-	github.com/go-sql-driver/mysql v1.7.1
-	github.com/google/cel-go v0.20.0
-	github.com/google/go-cmp v0.6.0
-	github.com/jackc/pgx/v4 v4.18.2
-	github.com/jackc/pgx/v5 v5.5.3
+	github.com/go-sql-driver/mysql v1.9.3
+	github.com/google/cel-go v0.27.0
+	github.com/google/go-cmp v0.7.0
+	github.com/jackc/pgx/v4 v4.18.3
+	github.com/jackc/pgx/v5 v5.8.0
 	github.com/jinzhu/inflection v1.0.0
-	github.com/lib/pq v1.10.9
-	github.com/pganalyze/pg_query_go/v4 v4.2.4-0.20231205012101-7463430c7b73
-	github.com/pingcap/tidb/pkg/parser v0.0.0-20231103154709-4f00ece106b1
+	github.com/lib/pq v1.11.2
+	github.com/ncruces/go-sqlite3 v0.30.5
+	github.com/pganalyze/pg_query_go/v6 v6.2.2
+	github.com/pingcap/tidb/pkg/parser v0.0.0-20250324122243-d51e00e5bbf0
 	github.com/riza-io/grpc-go v0.2.0
-	github.com/spf13/cobra v1.8.0
-	github.com/spf13/pflag v1.0.5
-	github.com/tetratelabs/wazero v1.6.0
-	github.com/wasilibs/go-pgquery v0.0.0-20231208014744-de63626a1e99
+	github.com/spf13/cobra v1.10.2
+	github.com/spf13/pflag v1.0.10
+	github.com/sqlc-dev/doubleclick v1.0.0
+	github.com/tetratelabs/wazero v1.11.0
+	github.com/wasilibs/go-pgquery v0.0.0-20250409022910-10ac41983c07
 	github.com/xeipuuv/gojsonschema v1.2.0
-	golang.org/x/sync v0.6.0
-	google.golang.org/grpc v1.62.0
-	google.golang.org/protobuf v1.32.0
+	golang.org/x/sync v0.19.0
+	google.golang.org/grpc v1.79.1
+	google.golang.org/protobuf v1.36.11
 	gopkg.in/yaml.v3 v3.0.1
-	modernc.org/sqlite v1.29.2
 )
 
 require (
-	github.com/cznic/mathutil v0.0.0-20181122101859-297441e03548 // indirect
-	github.com/dustin/go-humanize v1.0.1 // indirect
-	github.com/golang/protobuf v1.5.3 // indirect
-	github.com/google/uuid v1.6.0 // indirect
-	github.com/hashicorp/golang-lru/v2 v2.0.7 // indirect
+	cel.dev/expr v0.25.1 // indirect
+	filippo.io/edwards25519 v1.1.1 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgconn v1.14.3 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgproto3/v2 v2.3.3 // indirect
-	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
+	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
 	github.com/jackc/pgtype v1.14.0 // indirect
-	github.com/jackc/puddle/v2 v2.2.1 // indirect
-	github.com/mattn/go-isatty v0.0.16 // indirect
-	github.com/mattn/go-sqlite3 v1.14.18 // indirect
-	github.com/ncruces/go-strftime v0.1.9 // indirect
-	github.com/pingcap/errors v0.11.5-0.20210425183316-da1aaba5fb63 // indirect
-	github.com/pingcap/failpoint v0.0.0-20220801062533-2eaa32854a6c // indirect
+	github.com/jackc/puddle/v2 v2.2.2 // indirect
+	github.com/ncruces/julianday v1.0.0 // indirect
+	github.com/pingcap/errors v0.11.5-0.20240311024730-e056997136bb // indirect
+	github.com/pingcap/failpoint v0.0.0-20240528011301-b51a646c7c86 // indirect
 	github.com/pingcap/log v1.1.0 // indirect
-	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
 	github.com/rogpeppe/go-internal v1.10.0 // indirect
-	github.com/stoewer/go-strcase v1.2.0 // indirect
-	github.com/wasilibs/wazerox v0.0.0-20231208014050-e6b725634531 // indirect
+	github.com/wasilibs/wazero-helpers v0.0.0-20240620070341-3dff1577cd52 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f // indirect
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	go.uber.org/zap v1.26.0 // indirect
-	golang.org/x/crypto v0.20.0 // indirect
-	golang.org/x/exp v0.0.0-20231108232855-2478ac86f678 // indirect
-	golang.org/x/net v0.21.0 // indirect
-	golang.org/x/sys v0.17.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20240123012728-ef4313101c80 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240123012728-ef4313101c80 // indirect
+	go.uber.org/zap v1.27.0 // indirect
+	golang.org/x/crypto v0.47.0 // indirect
+	golang.org/x/exp v0.0.0-20250620022241-b7579e27df2b // indirect
+	golang.org/x/net v0.48.0 // indirect
+	golang.org/x/sys v0.40.0 // indirect
+	golang.org/x/text v0.33.0 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20251202230838-ff82c1b0f217 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20251202230838-ff82c1b0f217 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
-	modernc.org/gc/v3 v3.0.0-20240107210532-573471604cb6 // indirect
-	modernc.org/libc v1.41.0 // indirect
-	modernc.org/mathutil v1.6.0 // indirect
-	modernc.org/memory v1.7.2 // indirect
-	modernc.org/strutil v1.2.0 // indirect
-	modernc.org/token v1.1.0 // indirect
 )
+
+replace github.com/go-sql-driver/mysql => github.com/sqlc-dev/mysql v0.0.0-20251129233104-d81e1cac6db2

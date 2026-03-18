@@ -39,10 +39,14 @@ type Options struct {
 	OutputCopyfromFileName      string            `json:"output_copyfrom_file_name,omitempty" yaml:"output_copyfrom_file_name"`
 	OutputFilesSuffix           string            `json:"output_files_suffix,omitempty" yaml:"output_files_suffix"`
 	InflectionExcludeTableNames []string          `json:"inflection_exclude_table_names,omitempty" yaml:"inflection_exclude_table_names"`
+	WrapErrors                  bool              `json:"wrap_errors,omitempty" yaml:"wrap_errors"`
 	QueryParameterLimit         *int32            `json:"query_parameter_limit,omitempty" yaml:"query_parameter_limit"`
 	OmitSqlcVersion             bool              `json:"omit_sqlc_version,omitempty" yaml:"omit_sqlc_version"`
 	OmitUnusedStructs           bool              `json:"omit_unused_structs,omitempty" yaml:"omit_unused_structs"`
 	BuildTags                   string            `json:"build_tags,omitempty" yaml:"build_tags"`
+	Initialisms                 *[]string         `json:"initialisms,omitempty" yaml:"initialisms"`
+
+	InitialismsMap map[string]struct{} `json:"-" yaml:"-"`
 }
 
 type GlobalOptions struct {
@@ -109,6 +113,16 @@ func parseOpts(req *plugin.GenerateRequest) (*Options, error) {
 	if options.QueryParameterLimit == nil {
 		options.QueryParameterLimit = new(int32)
 		*options.QueryParameterLimit = 1
+	}
+
+	if options.Initialisms == nil {
+		options.Initialisms = new([]string)
+		*options.Initialisms = []string{"id"}
+	}
+
+	options.InitialismsMap = map[string]struct{}{}
+	for _, initial := range *options.Initialisms {
+		options.InitialismsMap[initial] = struct{}{}
 	}
 
 	return &options, nil

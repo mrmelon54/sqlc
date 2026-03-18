@@ -6,7 +6,7 @@ import (
 	"io"
 	"strings"
 
-	nodes "github.com/pganalyze/pg_query_go/v4"
+	nodes "github.com/pganalyze/pg_query_go/v6"
 
 	"github.com/sqlc-dev/sqlc/internal/engine/postgresql/parser"
 	"github.com/sqlc-dev/sqlc/internal/source"
@@ -271,7 +271,7 @@ func translate(node *nodes.Node) (ast.Node, error) {
 				case nodes.AlterTableType_AT_AddColumn:
 					d, ok := altercmd.Def.Node.(*nodes.Node_ColumnDef)
 					if !ok {
-						return nil, fmt.Errorf("expected alter table defintion to be a ColumnDef")
+						return nil, fmt.Errorf("expected alter table definition to be a ColumnDef")
 					}
 
 					rel, err := parseRelationFromNodes(d.ColumnDef.TypeName.Names)
@@ -290,7 +290,7 @@ func translate(node *nodes.Node) (ast.Node, error) {
 				case nodes.AlterTableType_AT_AlterColumnType:
 					d, ok := altercmd.Def.Node.(*nodes.Node_ColumnDef)
 					if !ok {
-						return nil, fmt.Errorf("expected alter table defintion to be a ColumnDef")
+						return nil, fmt.Errorf("expected alter table definition to be a ColumnDef")
 					}
 					col := ""
 					if altercmd.Name != "" {
@@ -494,6 +494,7 @@ func translate(node *nodes.Node) (ast.Node, error) {
 			ReturnType: rt,
 			Replace:    n.Replace,
 			Params:     &ast.List{},
+			Options:    convertSlice(n.Options),
 		}
 		for _, item := range n.Parameters {
 			arg := item.Node.(*nodes.Node_FunctionParameter).FunctionParameter
@@ -617,7 +618,7 @@ func translate(node *nodes.Node) (ast.Node, error) {
 				MissingOk: n.MissingOk,
 			}, nil
 
-		case nodes.ObjectType_OBJECT_TABLE:
+		case nodes.ObjectType_OBJECT_TABLE, nodes.ObjectType_OBJECT_MATVIEW, nodes.ObjectType_OBJECT_VIEW:
 			rel := parseRelationFromRangeVar(n.Relation)
 			return &ast.RenameTableStmt{
 				Table:     rel.TableName(),

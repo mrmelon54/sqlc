@@ -295,7 +295,7 @@ func remoteGenerate(ctx context.Context, configPath string, conf *config.Config,
 
 func parse(ctx context.Context, name, dir string, sql config.SQL, combo config.CombinedSettings, parserOpts opts.Parser, stderr io.Writer) (*compiler.Result, bool) {
 	defer trace.StartRegion(ctx, "parse").End()
-	c, err := compiler.NewCompiler(sql, combo)
+	c, err := compiler.NewCompiler(sql, combo, parserOpts)
 	defer func() {
 		if c != nil {
 			c.Close(ctx)
@@ -349,8 +349,9 @@ func codegen(ctx context.Context, combo config.CombinedSettings, sql OutputPair,
 		switch {
 		case plug.Process != nil:
 			handler = &process.Runner{
-				Cmd: plug.Process.Cmd,
-				Env: plug.Env,
+				Cmd:    plug.Process.Cmd,
+				Env:    plug.Env,
+				Format: plug.Process.Format,
 			}
 		case plug.WASM != nil:
 			handler = &wasm.Runner{
